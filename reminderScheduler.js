@@ -4,14 +4,13 @@ const Todo = require("./models/todoModel");
 // Schedule a job to run every minute
 cron.schedule("* * * * *", async () => {
   console.log("Running reminder check...");
-  const now = new Date();
-
-  console.log("the reminderscheduler time of new date()", now.toISOString());
+  const now = new Date().toISOString(); // Convert to ISO format
+  console.log("Cron ISO time:", now);
 
   try {
-    // Find all tasks with reminders due and not notified yet
     const dueTodos = await Todo.find({
-      reminder: { $lte: now.toISOString() },
+      reminder: { $lte: new Date(now) },
+      // Convert ISO string back to Date for MongoDB query
       notified: false,
     });
 
