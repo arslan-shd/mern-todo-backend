@@ -4,6 +4,8 @@ require("dotenv").config({ path: "./config.env" });
 
 console.log("Node env set to", process.env.NODE_ENV);
 
+require("./reminderScheduler");
+
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD

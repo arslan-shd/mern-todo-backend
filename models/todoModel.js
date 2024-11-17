@@ -11,7 +11,7 @@ const todoSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "in-progress", "completed"],
+    enum: ["pending", "completed"],
     default: "pending",
     required: true,
   },
@@ -28,10 +28,22 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now, // Set the default to current date and time
   },
+  // user_id: {
+  //   type: String,
+  //   required: true,
+  // },
   user_id: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+    ref: "User",
   },
+  reminder: {
+    type: Date,
+  }, // When the reminder should trigger
+  notified: {
+    type: Boolean,
+    default: false,
+  }, // Prevent duplicate notifications
 });
 
 const Todo = mongoose.model("Todo", todoSchema);
