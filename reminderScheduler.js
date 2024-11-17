@@ -4,13 +4,14 @@ const Todo = require("./models/todoModel");
 // Schedule a job to run every minute
 cron.schedule("* * * * *", async () => {
   console.log("Running reminder check...");
-  const now = new Date().toISOString(); // Convert to ISO format
-  console.log("Cron ISO time:", now);
+  const now = new Date();
+  const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Adjust to UTC
+
+  console.log("UTC adjusted time:", utcNow.toISOString());
 
   try {
     const dueTodos = await Todo.find({
-      reminder: { $lte: new Date(now) },
-      // Convert ISO string back to Date for MongoDB query
+      reminder: { $lte: utcNow },
       notified: false,
     });
 
