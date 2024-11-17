@@ -6,6 +6,8 @@ cron.schedule("* * * * *", async () => {
   console.log("Running reminder check...");
   const now = new Date();
 
+  console.log("the reminderscheduler time of new date()", now);
+
   try {
     // Find all tasks with reminders due and not notified yet
     const dueTodos = await Todo.find({
