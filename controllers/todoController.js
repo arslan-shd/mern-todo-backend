@@ -29,12 +29,13 @@ exports.createTodo = catchAsync(async (req, res) => {
   const user_id = req.user._id;
   // const newTodo = await Todo.create({ ...req.body, user_id });
   const { title, description, priority, dueDate, reminder } = req.body;
+
   const newTodo = await Todo.create({
     title,
     description,
     priority,
     dueDate,
-    reminder,
+    ...(reminder && { reminder }), // Include reminder only if it has a value
     user_id,
   });
 
