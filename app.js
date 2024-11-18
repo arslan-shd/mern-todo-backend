@@ -20,6 +20,4 @@ app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/", subscriptionsRouter);
 app.use(globalErrorHandler);
 
-`${import.meta.env.VITE_API_URL}/api/v1/subscribe`;
-
 module.exports = app;
