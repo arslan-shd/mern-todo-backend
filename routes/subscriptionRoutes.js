@@ -2,7 +2,7 @@ const express = require("express");
 const Subscription = require("../models/subscriptionModel");
 const router = express.Router();
 
-router.post("/subscribe", async (req, res) => {
+router.post("subscribe", async (req, res) => {
   try {
     const subscription = new Subscription(req.body);
     await subscription.save();
