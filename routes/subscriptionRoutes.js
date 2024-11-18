@@ -12,4 +12,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Endpoint to check if the subscription already exists
+router.post("/check", async (req, res) => {
+  const { endpoint } = req.body;
+  const subscriptionExists = await Subscription.exists({ endpoint });
+  res.json({ exists: !!subscriptionExists });
+});
+
+// Endpoint to save new subscriptions
+router.post("/", async (req, res) => {
+  const { endpoint, keys } = req.body;
+
+  // Avoid duplicates
+  const existingSubscription = await Subscription.findOne({ endpoint });
+  if (!existingSubscription) {
+    const newSubscription = new Subscription({ endpoint, keys });
+    await newSubscription.save();
+    res.status(201).json({ message: "Subscription saved successfully." });
+  } else {
+    res.status(200).json({ message: "Subscription already exists." });
+  }
+});
+
 module.exports = router;
