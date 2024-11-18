@@ -19,7 +19,10 @@ cron.schedule("* * * * *", async () => {
     for (const todo of dueTodos) {
       console.log(`Reminder: Task "${todo.title}" is due now.`);
       // Send push notification
-      await sendPushNotification("Reminder", `Task "${todo.title}" is due!`);
+      await sendPushNotification(
+        "Todo Reminder",
+        `Task "${todo.title}" is due!`
+      );
 
       // Mark the task as notified
       todo.notified = true;
