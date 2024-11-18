@@ -10,6 +10,7 @@ const app = express();
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
+    // origin: "http://localhost:5173",
   })
 );
 
@@ -17,7 +18,7 @@ app.use(express.json());
 
 app.use("/api/v1/todos", todosRouter);
 app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/", subscriptionsRouter);
+app.use("/api/v1/subscribe", subscriptionsRouter);
 app.use(globalErrorHandler);
 
 module.exports = app;
