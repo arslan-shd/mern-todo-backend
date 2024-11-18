@@ -20,7 +20,7 @@ cron.schedule("* * * * *", async () => {
       console.log(`Reminder: Task "${todo.title}" is due now.`);
       // Send push notification
       await sendPushNotification(
-        "Todo Reminder",
+        "Tickit reminder",
         `Task "${todo.title}" is due!`
       );
 
