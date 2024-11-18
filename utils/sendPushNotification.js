@@ -4,8 +4,8 @@ const Subscription = require("../models/subscriptionModel");
 // Configure VAPID keys
 webPush.setVapidDetails(
   "mailto:technosys485@gmail.com",
-  "BOVlE1Aq0kJ6mmVnBxIGbm-n42eax2uvdsjnvDZ6FMWfOavajJ6XLnndmHOHdhaAJM8lP_8CBMnCTi2VAW5pdVI",
-  "UGLuBFe75oEZO6ZUJfpyzhduj8iWI6Od4GbbVysdBIM"
+  process.env.SUBSCRIPTION_PUBLIC_KEY,
+  process.env.SUBSCRIPTION_PRIVATE_KEY
 );
 
 async function sendPushNotification(title, body) {
