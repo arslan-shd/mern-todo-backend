@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const todosRouter = require("./routes/todoRoutes");
 const usersRouter = require("./routes/userRoutes");
 const subscriptionsRouter = require("./routes/subscriptionRoutes");
@@ -15,6 +16,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/v1/todos", todosRouter);
 app.use("/api/v1/users", usersRouter);
