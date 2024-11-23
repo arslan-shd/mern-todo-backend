@@ -40,10 +40,19 @@ const todoSchema = new mongoose.Schema({
   reminder: {
     type: Date,
   }, // When the reminder should trigger
+
   notified: {
     type: Boolean,
     default: false,
   }, // Prevent duplicate notifications
+
+  subscription: {
+    endpoint: { type: String, required: true },
+    keys: {
+      p256dh: { type: String, required: true },
+      auth: { type: String, required: true },
+    },
+  },
 });
 
 const Todo = mongoose.model("Todo", todoSchema);
