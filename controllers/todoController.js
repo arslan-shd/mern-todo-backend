@@ -35,7 +35,7 @@ exports.createTodo = catchAsync(async (req, res) => {
   const newTodo = await Todo.create({
     title,
     description,
-    priority,
+    priority: priority || "low",
     dueDate,
     ...(reminder && { reminder }), // Include reminder only if it has a value
     user_id,

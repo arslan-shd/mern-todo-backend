@@ -14,8 +14,10 @@ const todoReminderJob = async (job) => {
       const payload = JSON.stringify({
         title: "Tickit Reminder",
         body: `Don't forget: ${todo.title}`,
-        icon: "https://mern-todo-backend-tc9t.onrender.com/notification-icon.png", // Optional icon for the notification
+        // icon: "https://mern-todo-backend-tc9t.onrender.com/notification-icon.png", // Optional icon for the notification
       });
+
+      console.log(payload, "this is the payload");
 
       await webPush.sendNotification(todo.subscription, payload);
       console.log("Notification sent for todo:", todo.title);
