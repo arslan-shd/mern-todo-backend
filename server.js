@@ -1,24 +1,16 @@
 require("dotenv").config({ path: "./config.env" });
-
 const server = require("./app");
 const mongoose = require("mongoose");
-// const Agenda = require("agenda");
 const agenda = require("./agendaInstance");
 const webPush = require("web-push");
 const todoReminderJob = require("./utils/todoReminderJob");
 
 console.log("Node env set to", process.env.NODE_ENV);
 
-// require("./reminderScheduler");
-
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD
 );
-
-// const agenda = new Agenda({
-//   db: { address: DB, collection: "agendaJobs" },
-// });
 
 webPush.setVapidDetails(
   "mailto:technosys485@gmail.com",
