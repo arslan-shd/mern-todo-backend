@@ -47,6 +47,7 @@ exports.createTodo = catchAsync(async (req, res) => {
   if (reminder) {
     await agenda.schedule(new Date(reminder), "send-todo-reminder", {
       todoId: newTodo._id,
+      userId: user_id,
     });
   }
 

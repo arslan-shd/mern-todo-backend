@@ -1,13 +1,16 @@
 const agenda = require("../agendaInstance");
 const Todo = require("../models/todoModel");
+const User = require("../models/userModel");
 const webPush = require("web-push");
+const registrationEmailMiddleware = require("../middleware/emailMiddleware");
 
 const todoReminderJob = async (job) => {
-  const { todoId } = job.attrs.data;
+  const { todoId, userId } = job.attrs.data;
 
   try {
     // Fetch the todo with its subscription data
     const todo = await Todo.findById(todoId);
+    const user = await User.findById(userId);
 
     if (todo && todo.subscription) {
       // Use web-push to send the notification
@@ -19,8 +22,18 @@ const todoReminderJob = async (job) => {
 
       console.log(payload, "this is the payload");
 
+      // await registrationEmailMiddleware((req, res, next) => {
+      //   res.status(200).json({
+      //     status: "success",
+      //     title: todo.title,
+      //     email: user.email,
+      //   });
+      // });
+
       await webPush.sendNotification(todo.subscription, payload);
       console.log("Notification sent for todo:", todo.title);
+
+      await registrationEmailMiddleware(todo, user.email);
 
       // Delete the associated Agenda job once the notification is sent
       await agenda.cancel({ "data.todoId": todoId });
