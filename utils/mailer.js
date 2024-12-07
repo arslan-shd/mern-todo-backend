@@ -36,6 +36,11 @@ const todoRegistrationEmail = async (email, todo) => {
       <html>
         <head>
           <style>
+          *{
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+          }
             body {
               font-family: Arial, sans-serif;
               color: #333;
@@ -71,12 +76,6 @@ const todoRegistrationEmail = async (email, todo) => {
             <div class="content">
               <h1>${todo.title} is due!</h1>
               <p>Your todo ${todo.title} is due for ${formattedDate}!</p>
-              
-            </div>
-            // <div class="footer">
-            //   <p>If you did not register, please ignore this email.</p>
-            // </div>
-          </div>
         </body>
       </html>
     `,
